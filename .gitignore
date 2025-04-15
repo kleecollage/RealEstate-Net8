@@ -1,0 +1,96 @@
+# .NET build/output
+**/bin/
+**/obj/
+
+# Rider IDE
+.idea/
+*.sln.iml
+*.DotSettings
+*.DotSettings.user
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options directory
+.vs/
+.vscode/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NuGet Packages
+**/packages/*
+*.nupkg
+.nuget/
+NuGet.exe
+
+# Azure Functions
+func/
+artifacts/
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Local development files
+appsettings.Development.json
+appsettings.local.json
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# Docker
+docker-compose.override.yml
+
+# macOS
+.DS_Store
+
+# Node.js (si usas frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Coverage
+coverage/
+*.coverage
+*.lcov
+
+# Others
+*~
+*.swp
+*.bak
+*.tmp
+*.orig
+*_backup
+*.pidb
+*.log
+*.csv
+*.vspx
+*.test.xml
+*.pyc
