@@ -1,4 +1,6 @@
+using System.Net;
 using Microsoft.AspNetCore.Identity;
+using NetKubernetes.Middleware;
 using NetKubernetes.Models;
 using NetKubernetes.Token;
 
@@ -24,8 +26,21 @@ public class EstateRepository(AppDbContext context, IUserSession session, UserMa
     public async Task CreateEstate(Estate estate)
     {
         var user = await userManager.FindByNameAsync(session.GetUserSession());
+        if (user is null)
+        {
+            throw new MiddlewareException(
+                HttpStatusCode.Unauthorized,
+                new {message = "User is not authorized to perform this operation"});
+        }
+
+        if (estate is null)
+        {
+            throw new MiddlewareException(
+                HttpStatusCode.BadRequest,
+                new {message = "Bad state data"});
+        }
         estate.CreatedAt = DateTime.Now;
-        estate.UserId = Guid.Parse(user!.Id);
+        estate.UserId = Guid.Parse(user.Id);
         context.Estates!.Add(estate);
     }
 

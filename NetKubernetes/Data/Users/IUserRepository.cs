@@ -1,4 +1,4 @@
-using NetKubernetes.Dtos.UserDto;
+using NetKubernetes.Dto.UserDto;
 
 namespace NetKubernetes.Data.Users;
 

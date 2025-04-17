@@ -1,4 +1,4 @@
-namespace NetKubernetes.Dtos.UserDto;
+namespace NetKubernetes.Dto.UserDto;
 
 public class UserResponseDto
 {
