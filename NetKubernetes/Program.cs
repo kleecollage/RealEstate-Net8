@@ -86,12 +86,38 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// CUSTOM MIDDLEWATE
 app.UseMiddleware<ManagerMiddleware>();
 
 app.UseAuthentication();
+app.UseCors("corsapp");
 
 app.UseAuthorization();
 
 app.MapControllers();
 
+using (var environment = app.Services.CreateScope())
+{
+    var services = environment.ServiceProvider;
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<User>>();
+        var context = services.GetRequiredService<AppDbContext>();
+        await context.Database.MigrateAsync();
+        await LoadDatabase.InsertData(context, userManager);
+    }
+    catch (Exception e)
+    {
+        var logging = services.GetRequiredService<ILogger<Program>>();
+        logging.LogError(e, "An error occured during migration");
+    }
+}
+
 app.Run();
+
+
+
+
+
+
+
