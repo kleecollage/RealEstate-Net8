@@ -9,6 +9,6 @@ public class EstateProfile: Profile
     public EstateProfile()
     {
         CreateMap<Estate, EstateResponseDto>();
-        CreateMap<EstateResponseDto, Estate>();
+        CreateMap<EstateRequestDto, Estate>();
     }
 }

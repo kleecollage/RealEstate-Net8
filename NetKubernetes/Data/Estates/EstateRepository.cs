@@ -1,5 +1,6 @@
 using System.Net;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NetKubernetes.Middleware;
 using NetKubernetes.Models;
 using NetKubernetes.Token;
@@ -8,19 +9,19 @@ namespace NetKubernetes.Data.Estates;
 
 public class EstateRepository(AppDbContext context, IUserSession session, UserManager<User> userManager): IEstateRepository
 {
-    public bool SaveChanges()
+    public async Task<bool> SaveChanges()
     {
-        return (context.SaveChanges() >= 0);
+        return await context.SaveChangesAsync() >= 0;
     }
 
-    public IEnumerable<Estate> GetAllEstates()
+    public async Task<IEnumerable<Estate>> GetAllEstates()
     {
-        return context.Estates!.ToList();
+        return await context.Estates!.ToListAsync();
     }
 
-    public Estate GetEstateById(int id)
+    public async Task<Estate> GetEstateById(int id)
     {
-        return context.Estates!.FirstOrDefault(e => e.Id == id)!;
+        return await context.Estates!.FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task CreateEstate(Estate estate)
@@ -41,7 +42,7 @@ public class EstateRepository(AppDbContext context, IUserSession session, UserMa
         }
         estate.CreatedAt = DateTime.Now;
         estate.UserId = Guid.Parse(user.Id);
-        context.Estates!.Add(estate);
+        await context.Estates!.AddAsync(estate);
     }
 
     public void UpdateEstate(Estate estate)
@@ -49,9 +50,9 @@ public class EstateRepository(AppDbContext context, IUserSession session, UserMa
         throw new NotImplementedException();
     }
 
-    public void DeleteEstate(int id)
+    public async Task DeleteEstate(int id)
     {
-        var estate = context.Estates!.FirstOrDefault(e => e.Id == id);
+        var estate = await context.Estates!.FirstOrDefaultAsync(e => e.Id == id);
         context.Estates!.Remove(estate!);
     }
 }

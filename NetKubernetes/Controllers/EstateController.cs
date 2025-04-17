@@ -13,16 +13,16 @@ namespace NetKubernetes.Controllers;
 public class EstateController(IEstateRepository repository, IMapper mapper): ControllerBase
 {
     [HttpGet]
-    public ActionResult<IEnumerable<EstateResponseDto>> GetEstates()
+    public async Task<ActionResult<IEnumerable<EstateResponseDto>>> GetEstates()
     {
-        var estates = repository.GetAllEstates();
+        var estates = await repository.GetAllEstates();
         return Ok(mapper.Map<IEnumerable<EstateResponseDto>>(estates));
     }
 
     [HttpGet("{id}", Name = "GetEstateById")]
-    public ActionResult<EstateResponseDto> GetEstateById(int id)
+    public async Task<ActionResult<EstateResponseDto>> GetEstateById(int id)
     {
-        var estate = repository.GetEstateById(id);
+        var estate = await repository.GetEstateById(id);
         if (estate is null)
         {
             throw new MiddlewareException(
@@ -34,21 +34,21 @@ public class EstateController(IEstateRepository repository, IMapper mapper): Con
     }
 
     [HttpPost]
-    public ActionResult<EstateResponseDto> CreateEstate([FromBody] EstateResponseDto estate)
+    public async Task<ActionResult<EstateResponseDto>> CreateEstate([FromBody] EstateResponseDto estate)
     {
         var estateModel = mapper.Map<Estate>(estate);
-        repository.CreateEstate(estateModel);
-        repository.SaveChanges();
+        await repository.CreateEstate(estateModel);
+        await repository.SaveChanges();
 
         var estateResponse = mapper.Map<EstateResponseDto>(estateModel);
         return CreatedAtRoute(nameof(GetEstateById), new { estateResponse.Id}, estateResponse);
     }
 
     [HttpDelete("{id}")]
-    public ActionResult DeleteEstate(int id)
+    public async Task<ActionResult> DeleteEstate(int id)
     {
-        repository.DeleteEstate(id);
-        repository.SaveChanges();
+        await repository.DeleteEstate(id);
+        await repository.SaveChanges();
         return Ok();
     }
 }
