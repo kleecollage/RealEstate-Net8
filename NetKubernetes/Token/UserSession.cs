@@ -8,8 +8,8 @@ public class UserSession(IHttpContextAccessor httpContextAccessor): IUserSession
     {
         var username = httpContextAccessor
             .HttpContext!
-            .User?
-            .Claims?
+            .User
+            .Claims
             .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
         return username!;

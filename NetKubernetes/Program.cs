@@ -58,7 +58,8 @@ builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 builder.Services.AddScoped<IUserSession, UserSession>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("My secret word"));
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
     {
@@ -67,7 +68,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = key,
             ValidateAudience = false,
-            ValidateIssuer = false
+            ValidateIssuer = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero
         };
     });
 
