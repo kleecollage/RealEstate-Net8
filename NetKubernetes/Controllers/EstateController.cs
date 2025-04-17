@@ -34,7 +34,7 @@ public class EstateController(IEstateRepository repository, IMapper mapper): Con
     }
 
     [HttpPost]
-    public async Task<ActionResult<EstateResponseDto>> CreateEstate([FromBody] EstateResponseDto estate)
+    public async Task<ActionResult<EstateResponseDto>> CreateEstate([FromBody] EstateRequestDto estate)
     {
         var estateModel = mapper.Map<Estate>(estate);
         await repository.CreateEstate(estateModel);
