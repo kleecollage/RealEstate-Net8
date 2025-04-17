@@ -1,5 +1,8 @@
+using System.Net;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NetKubernetes.Dtos.UserDto;
+using NetKubernetes.Middleware;
 using NetKubernetes.Models;
 using NetKubernetes.Token;
 
@@ -25,18 +28,51 @@ public class UserRepository(AppDbContext context, UserManager<User> userManager,
     public async Task<UserResponseDto> GetUser()
     {
         var user = await userManager.FindByNameAsync(userSession.GetUserSession());
-        return TransformUserToUserDto(user!);
+        if (user == null)
+        {
+            throw new MiddlewareException(
+                HttpStatusCode.Unauthorized,
+                new { message = "Token user not found on database" });
+        }
+        return TransformUserToUserDto(user);
     }
 
     public async Task<UserResponseDto> Login(UserLoginRequestDto request)
     {
         var user = await userManager.FindByEmailAsync(request.Email!);
-        await signInManager.CheckPasswordSignInAsync(user!, request.Password!, false);
-        return TransformUserToUserDto(user!);
+        if (user is null)
+        {
+            throw new MiddlewareException(
+                HttpStatusCode.Unauthorized,
+                new { message = "User email not exist on database" });
+        }
+        var result = await signInManager.CheckPasswordSignInAsync(user, request.Password!, false);
+        if (result.Succeeded)
+            return TransformUserToUserDto(user);
+        
+        throw new MiddlewareException(
+            HttpStatusCode.Unauthorized, 
+            new { message = "Incorrect email or password" });
     }
 
     public async Task<UserResponseDto> Register(UserRegisterRequestDto request)
     {
+        var emailExists = await context.Users.Where(u => u.Email == request.Email).AnyAsync();
+        if (emailExists)
+        {
+            throw new MiddlewareException(
+                HttpStatusCode.BadRequest,
+                new { message = "Email already exists" });
+        }
+        
+        var usernameExists = await context.Users.Where(u => u.UserName == request.Username).AnyAsync();
+        if (usernameExists)
+        {
+            throw new MiddlewareException(
+                HttpStatusCode.BadRequest,
+                new { message = "Username already exists" });
+        }
+        
         var user = new User
         {
             Name = request.Name,
@@ -46,7 +82,10 @@ public class UserRepository(AppDbContext context, UserManager<User> userManager,
             UserName = request.Username,
         };
         
-        await userManager.CreateAsync(user, request.Password!);
-        return TransformUserToUserDto(user);
+        var result = await userManager.CreateAsync(user, request.Password!);
+        if (result.Succeeded)
+            return TransformUserToUserDto(user);
+
+        throw new Exception("Oops. User could not be registered");
     }
 }
