@@ -13,7 +13,7 @@
     "build:prod": "ng bild --c=prod"
   },
   "private": true,
- "dependencies": {
+  "dependencies": {
     "@angular/animations": "^14.1.0",
     "@angular/cdk": "^14.1.0",
     "@angular/common": "^14.1.0",
@@ -31,7 +31,7 @@
     "@ngrx/entity": "^14.0.2",
     "@ngrx/store": "^14.0.2",
     "@ngrx/store-devtools": "^14.0.2",
-    "firebase": "^9.9.1",
+    "firebase": "^9.23.0",
     "ngx-image-cropper": "^6.2.2",
     "rxfire": "^6.0.3",
     "rxjs": "~7.5.0",
