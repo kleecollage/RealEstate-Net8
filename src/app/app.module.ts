@@ -2,21 +2,21 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IndicatorsModule } from '@app/shared/indicators';
+import { environment } from '@src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { from } from 'rxjs';
-import { environment } from '@src/environments/environment';
-import { IndicatorsModule } from '@app/shared/indicators';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopupsModule } from './shared/popups';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFirestoreModule,
     AngularFireAuthModule,
     IndicatorsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PopupsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
