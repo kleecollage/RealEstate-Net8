@@ -1,0 +1,12 @@
+@import 'colors';
+@import 'fonts';
+@import 'vendor';
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: $base-font-faminly;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  background-color: white;
+}
