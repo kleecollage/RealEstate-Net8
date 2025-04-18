@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
+  showSpinner = false;
   title = 'cli-inmueble-app';
 
   constructor(private fs:AngularFirestore){}
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit{
     })
   }
 
-
+  onToggleSpinner(): void {
+    this.showSpinner = !this.showSpinner
+  }
 
 }
