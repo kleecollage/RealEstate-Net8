@@ -37,7 +37,7 @@
   }
 }
 
-.file  {
+.file {
   &__input {
     display: none;
   }
@@ -48,5 +48,11 @@
       color: $primary-dark;
       cursor: pointer;
     }
+  }
+
+  .error {
+    color: $error;
+    text-align: center;
+    padding: 12px;
   }
 }
