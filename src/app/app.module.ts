@@ -18,6 +18,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PopupsModule } from './shared/popups';
 
+import { NotificationModule } from '@app/services';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -35,7 +37,8 @@ import { PopupsModule } from './shared/popups';
     AngularFireAuthModule,
     IndicatorsModule,
     BrowserAnimationsModule,
-    PopupsModule
+    PopupsModule,
+    NotificationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

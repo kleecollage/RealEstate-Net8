@@ -27,6 +27,7 @@
   </div>
 
   <div class="files-upload__footer">
-
+    <button class="app-button" (click)="onClose()" *ngIf="!filesUrls.length">Close</button>
+    <button class="app-button" (click)="onComplete()" *ngIf="filesUrls.length">Complete</button>
   </div>
 </div>

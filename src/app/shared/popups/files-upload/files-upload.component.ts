@@ -57,4 +57,12 @@ export class FilesUploadComponent implements OnInit {
     this.filesUrls.push(url);
   }
 
+  onComplete(): void {
+    const res = this.data.multiple ? this.filesUrls : this.filesUrls[0];
+    this.dialogRef.close(res);
+  }
+
+  onClose(): void {
+    this.dialogRef.close();
+  }
 }
