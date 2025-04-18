@@ -1,15 +1,15 @@
 <mat-nav-list>
-  <a mat-list-item (click)="closeMenu()">
+  <a mat-list-item (click)="closeMenu()" routerLink="/">
     <mat-icon class="mat-18">home</mat-icon>
     <span class="nav-list-label">Home</span>
   </a>
 
-  <a mat-list-item (click)="closeMenu()">
+  <a mat-list-item (click)="closeMenu()" routerLink="auth/login">
     <mat-icon class="mat-18">login</mat-icon>
     <span class="nav-list-label">Login</span>
   </a>
 
-  <a mat-list-item (click)="closeMenu()">
+  <a mat-list-item (click)="closeMenu()" routerLink="auth/register">
     <mat-icon class="mat-18">how_to_register</mat-icon>
     <span class="nav-list-label">Register</span>
   </a>
