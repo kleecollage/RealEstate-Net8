@@ -1,1 +1,50 @@
-<p>registration works!</p>
+<section fxLayoutAlign="center" >
+  <mat-card>
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="registerUser(f)">
+      <mat-form-field>
+        <mat-label>Enter your name</mat-label>
+        <input matInput type="text" placeholder="Name" name="name" ngModel required>
+        <mat-error>You must provide your name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your lastname</mat-label>
+        <input matInput type="text" placeholder="Lastname" name="lastname" ngModel required>
+        <mat-error>You must provide your lastname</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your username</mat-label>
+        <input matInput type="text" placeholder="Username" name="username" ngModel required>
+        <mat-error>You must provide a username</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your phone</mat-label>
+        <input matInput type="text" placeholder="Phone" name="phone" ngModel required>
+        <mat-error>You must provide your phone</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input matInput type="email" placeholder="Email" name="email" ngModel required>
+        <mat-error>You must provide a valid email</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input matInput type="password" placeholder="Password" name="password" ngModel required minlength="7">
+        <mat-error>Password must contain at least 7 characters</mat-error>
+        <!-- <mat-error *ngIf="f.password.touched && f.password.invalid">You must provide password</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirm your password</mat-label>
+        <input matInput type="password" placeholder="Confirm Password" name="passwordConfirm" ngModel required minlength="7">
+        <mat-error>Password must contain at least 7 characters</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Login</button>
+    </form>
+  </mat-card>
+</section>
