@@ -5,12 +5,12 @@
     "ng": "ng",
     "start": "npm run start:dev",
     "build": "npm run build:dev",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --watch --configuration dev",
     "test": "ng test",
     "start:dev": "ng serve --c=dev",
     "build:dev": "ng build --c=dev",
     "start:prod": "ng serve --c=prod",
-    "build:prod": "ng bild --c=prod"
+    "build:prod": "ng build --c=prod"
   },
   "private": true,
   "dependencies": {
@@ -31,9 +31,10 @@
     "@ngrx/entity": "^14.0.2",
     "@ngrx/store": "^14.0.2",
     "@ngrx/store-devtools": "^14.0.2",
-    "firebase": "^9.23.0",
+    "@types/node": "^16.0.0",
+    "firebase": "^9.9.1",
     "ngx-image-cropper": "^6.2.2",
-    "rxfire": "^6.0.3",
+    "rxfire": "^6.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
