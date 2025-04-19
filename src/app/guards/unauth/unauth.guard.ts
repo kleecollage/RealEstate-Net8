@@ -28,11 +28,11 @@ export class UnauthGuard implements CanActivate, CanActivateChild, CanLoad {
     return this.store.pipe(select(fromUser.getUserState)).pipe(
       filter(state => !state.loading),
       tap( state => {
-        if (state.id) {
+        if (state.entity?.email) {
           this.router.navigate(['/']);
         }
       }),
-      map(state => !!state.id)
+      map(state => !state.entity?.email)
     )
   }
 }
