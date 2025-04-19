@@ -11,5 +11,5 @@ export const environment = {
       appId: "1:608569932241:web:1bf23d64a8b3efaf04c8f0"
     }
   },
-  url: 'http://localhost:5000/'
+  url: 'http://localhost:5000/api/'
 };

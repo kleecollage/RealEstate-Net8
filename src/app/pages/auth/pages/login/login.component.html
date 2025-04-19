@@ -1,3 +1,5 @@
+<app-spinner *ngIf="loading$ | async"></app-spinner>
+
 <section fxLayoutAlign="center" >
   <mat-card>
     <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="loginUser(f)">

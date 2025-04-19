@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
+import { IndicatorsModule } from "@app/shared/indicators/indicators.module";
+import { SpinnerModule } from "@app/shared/indicators/spinner/spinner.module";
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
@@ -25,6 +27,9 @@ import { LoginComponent } from './login.component';
     MatCardModule,
     MatInputModule,
     FormsModule,
+    FlexLayoutModule,
+    IndicatorsModule,
+    SpinnerModule,
     FlexLayoutModule,
   ]
 })
