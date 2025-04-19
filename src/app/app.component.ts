@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { NotificationService } from '@app/services';
+import * as fromRoot from '@app/store';
+import * as fromUser from '@app/store/user';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +15,25 @@ import { NotificationService } from '@app/services';
 
 export class AppComponent implements OnInit{
   showSpinner = false;
-  title = 'cli-inmueble-app';
+  title = 'estates-app';
 
-  constructor(private fs:AngularFirestore, private notificationService: NotificationService) {}
+  user$!: Observable<fromUser.UserResponse>;
+  isAuthorized$!: Observable<boolean>;
+
+  constructor(
+    private fs:AngularFirestore,
+    private notificationService: NotificationService,
+    private store: Store<fromRoot.State>,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.user$ = this.store.pipe(select(fromUser.getUser)) as Observable<fromUser.UserResponse>;
+    this.isAuthorized$ = this.store.pipe(select(fromUser.getIsAuthorized)) as Observable<boolean>;
+    /* TEST: Get data from firestore
     this.fs.collection('test').stateChanges().subscribe(people => {
       console.log(people.map(person => person.payload.doc.data()));
-    })
+    }) */
   }
 
   onToggleSpinner(): void {
@@ -34,6 +50,12 @@ export class AppComponent implements OnInit{
 
   onError(): void {
     this.notificationService.error('Process failed');
+  }
+
+  onSignOut(): void {
+    localStorage.removeItem('token');
+    this.store.dispatch(new fromUser.SignOut());
+    this.router.navigate(['/auth/login']);
   }
 
 }

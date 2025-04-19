@@ -1,31 +1,31 @@
 <mat-nav-list>
-  <a mat-list-item (click)="closeMenu()" routerLink="/">
-    <mat-icon class="mat-18">home</mat-icon>
+  <a *ngIf="isAuthorized" mat-list-item (click)="closeMenu()" routerLink="/">
+    <mat-icon>home</mat-icon>
     <span class="nav-list-label">Home</span>
   </a>
 
-  <a mat-list-item (click)="closeMenu()" routerLink="auth/login">
-    <mat-icon class="mat-18">login</mat-icon>
+  <a *ngIf="!isAuthorized" mat-list-item (click)="closeMenu()" routerLink="auth/login">
+    <mat-icon>login</mat-icon>
     <span class="nav-list-label">Login</span>
   </a>
 
-  <a mat-list-item (click)="closeMenu()" routerLink="auth/register">
-    <mat-icon class="mat-18">how_to_register</mat-icon>
+  <a *ngIf="!isAuthorized" mat-list-item (click)="closeMenu()" routerLink="auth/register">
+    <mat-icon>how_to_register</mat-icon>
     <span class="nav-list-label">Register</span>
   </a>
 
-  <a mat-list-item (click)="closeMenu()">
-    <mat-icon class="mat-18">contact_support</mat-icon>
+  <a *ngIf="isAuthorized" mat-list-item (click)="closeMenu()">
+    <mat-icon>contact_support</mat-icon>
     <span class="nav-list-label">Contact</span>
   </a>
 
-  <a mat-list-item (click)="closeMenu()">
-    <mat-icon class="mat-20">add</mat-icon>
+  <a *ngIf="isAuthorized" mat-list-item (click)="closeMenu()">
+    <mat-icon>add</mat-icon>
     <span class="nav-list-label">New Product</span>
   </a>
 
-  <a mat-list-item (click)="closeMenu()">
-    <mat-icon class="mat-14">logout</mat-icon>
+  <a *ngIf="isAuthorized" mat-list-item (click)="closeMenu()" (click)="onSignOut()">
+    <mat-icon>logout</mat-icon>
     <span class="nav-list-label">Logout</span>
   </a>
 </mat-nav-list>
