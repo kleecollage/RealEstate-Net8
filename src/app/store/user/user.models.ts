@@ -14,4 +14,4 @@ export interface UserRequest extends User {
   password: string;
 }
 
-export type UserCreateRequest = Omit<UserRequest, 'token'>
+export type UserCreateRequest = Omit<UserRequest, 'token' | 'id'>

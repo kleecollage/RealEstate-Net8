@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
+import { SpinnerModule } from "@app/shared/indicators";
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { RegistrationComponent } from './registration.component';
 
@@ -25,7 +26,8 @@ import { RegistrationComponent } from './registration.component';
     MatCardModule,
     MatInputModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    SpinnerModule,
   ]
 })
 export class RegistrationModule { }
