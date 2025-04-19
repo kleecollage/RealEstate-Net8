@@ -8,23 +8,30 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NotificationModule } from '@app/services';
 import { IndicatorsModule } from '@app/shared/indicators';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PopupsModule } from './shared/popups';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuListComponent } from './components/menu-list/menu-list.component';
+import { PopupsModule } from './shared/popups';
+import { effects, reducers } from './store';
+
+const StoreDevTools = !environment.production ? StoreDevtoolsModule.instrument({maxAge: 50}) : [];
 
 @NgModule({
   declarations: [
@@ -52,7 +59,16 @@ import { MenuListComponent } from './components/menu-list/menu-list.component';
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
-    MatListModule
+    MatListModule,
+    StoreDevTools,
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictActionImmutability: true,
+        strictStateImmutability: true
+      }
+    }),
+    EffectsModule.forRoot(effects),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
