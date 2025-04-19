@@ -30,6 +30,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.user$ = this.store.pipe(select(fromUser.getUser)) as Observable<fromUser.UserResponse>;
     this.isAuthorized$ = this.store.pipe(select(fromUser.getIsAuthorized)) as Observable<boolean>;
+    this.store.dispatch(new fromUser.Init());
     /* TEST: Get data from firestore
     this.fs.collection('test').stateChanges().subscribe(people => {
       console.log(people.map(person => person.payload.doc.data()));

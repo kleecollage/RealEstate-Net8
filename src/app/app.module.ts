@@ -8,7 +8,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AuthInterceptor } from '@app/auth-interceptor';
 import { NotificationModule } from '@app/services';
 import { IndicatorsModule } from '@app/shared/indicators';
 import { EffectsModule } from '@ngrx/effects';
@@ -70,7 +71,9 @@ const StoreDevTools = !environment.production ? StoreDevtoolsModule.instrument({
     EffectsModule.forRoot(effects),
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

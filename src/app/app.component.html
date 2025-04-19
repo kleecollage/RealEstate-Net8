@@ -1,6 +1,9 @@
 <mat-sidenav-container>
     <mat-sidenav #menu mode="over" align="start">
-        <app-menu-list (menuToggle)="menu.toggle()" (signOut)="onSignOut()" [isAuthorized] = "isAuthorized$ | async" />
+        <app-menu-list
+        (menuToggle)="menu.toggle()"
+        (signOut)="onSignOut()"
+        [isAuthorized] = "isAuthorized$ | async"></app-menu-list>
     </mat-sidenav>
     <!-- Body -->
     <mat-sidenav-content>
