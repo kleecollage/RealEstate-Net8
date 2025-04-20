@@ -29,7 +29,7 @@ export class CreateError implements Action {
 // ==============================   READ   ============================== //
 export class Read implements Action {
   readonly type = Types.READ;
-  constructor(public estate: EstateCreateRequest) {}
+  constructor() {}
 }
 
 export class ReadSuccess implements Action {

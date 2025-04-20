@@ -20,6 +20,27 @@ export class SaveEffects {
     private notification: NotificationService
   ) { }
 
+  create$: Observable<Action> = createEffect(() =>
+    this.actions.pipe(
+      ofType(fromActions.Types.CREATE),
+      map((action: fromActions.Create) => action.estate),
+      switchMap( (request: EstateCreateRequest) =>
+        this.httpClient.post<EstateResponse>(`${environment.url}estate`, request)
+        .pipe(
+          delay(1000),
+          tap((response: EstateResponse) => {
+            this.router.navigate(['/estate/list']);
+          }),
+          map((estate: EstateResponse) => new fromActions.CreateSuccess(estate)),
+          catchError(err => {
+            this.notification.error(`Error creating estate: ${err.message}`);
+            return of(new fromActions.CreateError(err.message));
+          })
+        )
+      )
+    )
+  );
+
   read$: Observable<Action> = createEffect( () =>
     this.actions.pipe(
       ofType(fromActions.Types.READ),
@@ -34,24 +55,4 @@ export class SaveEffects {
     )
   );
 
-  create$: Observable<Action> = createEffect(() =>
-    this.actions.pipe(
-      ofType(fromActions.Types.CREATE),
-      map((action: fromActions.Create) => action.estate),
-      switchMap( (request: EstateCreateRequest) =>
-        this.httpClient.post<EstateResponse>(`${environment.url}estate`, request)
-        .pipe(
-          delay(1000),
-          tap((response: EstateResponse) => {
-            this.router.navigate(['/estatelist']);
-          }),
-          map((estate: EstateResponse) => new fromActions.CreateSuccess(estate)),
-          catchError(err => {
-            this.notification.error(`Error creating estate: ${err.message}`);
-            return of(new fromActions.CreateError(err.message));
-          })
-        )
-      )
-    )
-  )
 }
