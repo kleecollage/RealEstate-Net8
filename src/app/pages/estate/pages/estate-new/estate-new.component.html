@@ -1,1 +1,46 @@
-<p>estate-new works!</p>
+<app-spinner *ngIf="loading$ | async"></app-spinner>
+
+<mat-toolbar color="secondary">
+  <span>Register New Estate</span>
+</mat-toolbar>
+
+<section fxLayoutAlign="center">
+  <mat-card>
+    <form fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    (ngSubmit)="registerEstate(f)"
+    #f="ngForm">
+      <div class="personal__photo">
+        <div class="photo">
+          <app-entity-photo class="photo__img" [photoURL]="photoLoaded"></app-entity-photo>
+          <button mat-button appFilesUpload (changed)="onFilesChanged($event)">
+            <mat-icon>upload</mat-icon>
+            Upload Image
+          </button>
+        </div>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Enter Name</mat-label>
+        <input matInput type="text" name="name" placeholder="Name" ngModel required>
+        <mat-error>Name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter Address</mat-label>
+        <input matInput type="text" name="address" placeholder="Address" ngModel required>
+        <mat-error>Address is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter Price</mat-label>
+        <input matInput type="number" name="price" placeholder="Price" ngModel required>
+        <mat-error>Price is required</mat-error>
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Save Estate</button>
+
+    </form>
+  </mat-card>
+</section>
