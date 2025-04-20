@@ -1,7 +1,8 @@
 export interface Estate {
   id: number;
   name: string;
+  address: string;
   photo: string;
   price: number;
-  createdAt: string;
+  created_at: string;
 }
