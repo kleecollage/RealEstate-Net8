@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EstateNewComponent } from '@app/pages/estate/estate-new/estate-new.component';
+import { EstateNewComponent } from '@app/pages/estate/pages/estate-new/estate-new.component';
 
 const routes: Routes = [
   {

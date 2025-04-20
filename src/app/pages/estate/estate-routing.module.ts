@@ -5,12 +5,12 @@ import { AuthGuard } from '@app/guards/auth/auth.guard';
 const routes: Routes = [
   {
     path: 'new',
-    loadChildren: () => import('./estate-new/estate-new.module').then(m => m.EstateNewModule),
+    loadChildren: () => import('./pages/estate-new/estate-new.module').then(m => m.EstateNewModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'list',
-    loadChildren: () => import('./estate-list/estate-list.module').then(m => m.EstateListModule),
+    loadChildren: () => import('./pages/estate-list/estate-list.module').then(m => m.EstateListModule),
     canActivate: [AuthGuard]
   }
 ];
