@@ -2,7 +2,7 @@ export interface Estate {
   id: number;
   name: string;
   address: string;
-  photo: string;
+  picture: string;
   price: number;
-  created_at: string;
+  createdAt: string;
 }

@@ -18,7 +18,21 @@ export class SaveEffects {
     private httpClient: HttpClient,
     private router: Router,
     private notification: NotificationService
-  ) {}
+  ) { }
+
+  read$: Observable<Action> = createEffect( () =>
+    this.actions.pipe(
+      ofType(fromActions.Types.READ),
+      switchMap( () =>
+        this.httpClient.get<EstateResponse[]>(`${environment.url}estate`)
+        .pipe(
+          delay(1000),
+          map( (estates: EstateResponse[]) => new fromActions.ReadSuccess(estates) ),
+          catchError(err => of(new fromActions.ReadError(err.message)))
+        )
+      )
+    )
+  );
 
   create$: Observable<Action> = createEffect(() =>
     this.actions.pipe(
