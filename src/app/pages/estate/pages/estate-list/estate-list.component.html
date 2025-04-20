@@ -1,5 +1,24 @@
 <app-spinner *ngIf="loading$ | async"></app-spinner>
 
-<h1> HELLOO </h1>
-<pre>{{ estates$ | async }}</pre>
-<pre>{{ estates$ | async | json }}</pre>
+<section class="container">
+  <ul class="cards" *ngIf="estates$ | async as estates">
+    <li class="cards__item" *ngFor="let estate of estates">
+      <mat-card class="example-card">
+          <mat-card-header>
+              <mat-card-title>{{ estate.name }}</mat-card-title>
+              <mat-card-subtitle>Price: ${{ estate.price }}</mat-card-subtitle>
+          </mat-card-header>
+          <img matCardImage src="{{ estate.picture ? estate.picture : pictureDefault }}" alt="{{ estate.name }}">
+          <mat-card-content>
+              <p>
+                {{ estate.address }}
+              </p>
+          </mat-card-content>
+          <mat-card-actions align="start">
+              <button mat-button>See</button>
+              <button mat-button>Buy</button>
+          </mat-card-actions>
+      </mat-card>
+    </li>
+  </ul>
+</section>
