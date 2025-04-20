@@ -30,11 +30,11 @@ export function reducer(state: ListState = initialState, action: fromActions.All
     }
 
     case fromActions.Types.READ: {
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true };
     }
 
     case fromActions.Types.READ_SUCCESS: {
-      return { ...state, loading: false, error: null, estates: action.estates };
+      return { ...state, loading: false, estates: action.estates };
     }
 
     case fromActions.Types.READ_ERROR: {

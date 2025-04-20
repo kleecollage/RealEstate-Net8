@@ -6,7 +6,7 @@ export enum Types {
   CREATE_SUCCESS = '[Estate] Create: Success',
   CREATE_ERROR = '[Estate] Create: Error',
 
-  READ = '[Estate] Read: Start',
+  READ = '[Estate] Read',
   READ_SUCCESS = '[Estate] Read: Success',
   READ_ERROR = '[Estate] Read: Error',
 }
@@ -34,7 +34,7 @@ export class Read implements Action {
 
 export class ReadSuccess implements Action {
   readonly type = Types.READ_SUCCESS;
-  constructor(public estate: EstateResponse[]) {}
+  constructor(public estates: EstateResponse[]) {}
 }
 
 export class ReadError implements Action {

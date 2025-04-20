@@ -47,6 +47,7 @@ export class SaveEffects {
       switchMap( () =>
         this.httpClient.get<EstateResponse[]>(`${environment.url}estate`)
         .pipe(
+          // tap(response => console.log('API Response:', response)), // DEBUG
           delay(1000),
           map( (estates: EstateResponse[]) => new fromActions.ReadSuccess(estates) ),
           catchError(err => of(new fromActions.ReadError(err.message)))
