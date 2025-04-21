@@ -94,3 +94,5 @@ coverage/
 *.vspx
 *.test.xml
 *.pyc
+
+mysql_heroku_connection.txt
