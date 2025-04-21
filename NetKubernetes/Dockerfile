@@ -1,22 +1,22 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 # RUN --network=host dotnet nuget list source 
-USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 80
+ENV ASPNETCORE_URLS=http://+:5000
+
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["NetKubernetes.csproj", "NetKubernetes/"]
-RUN dotnet restore "NetKubernetes/NetKubernetes.csproj"
+COPY ["NetKubernetes.csproj", "./"]
+RUN dotnet restore "NetKubernetes.csproj"
 COPY . .
-WORKDIR "/src/NetKubernetes"
-RUN dotnet build "./NetKubernetes.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/."
+RUN dotnet build "NetKubernetes.csproj" -c Release -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./NetKubernetes.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "NetKubernetes.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
