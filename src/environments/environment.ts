@@ -16,6 +16,7 @@ export const environment = {
     }
   },
   url: 'http://localhost:5000/api/'
+  // url: 'https://dotnetapp-37f8862db0b0.herokuapp.com/api/'
 };
 
 /*
