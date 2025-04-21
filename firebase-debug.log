@@ -1,0 +1,21 @@
+[debug] [2025-04-21T00:33:12.206Z] ----------------------------------------------------------------------
+[debug] [2025-04-21T00:33:12.208Z] Command:       /home/mrrobot/.nvm/versions/node/v20.18.1/bin/node /home/mrrobot/.nvm/versions/node/v20.18.1/bin/firebase init
+[debug] [2025-04-21T00:33:12.208Z] CLI Version:   14.2.0
+[debug] [2025-04-21T00:33:12.208Z] Platform:      linux
+[debug] [2025-04-21T00:33:12.208Z] Node Version:  v20.18.1
+[debug] [2025-04-21T00:33:12.208Z] Time:          Sun Apr 20 2025 18:33:12 GMT-0600 (Central Standard Time)
+[debug] [2025-04-21T00:33:12.208Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-21T00:33:12.213Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-21T00:33:12.213Z] > authorizing via signed-in user (antonio.hs6991@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/mrrobot/Documents/RiderProjects/NET8/NetKubernetesFront
+
