@@ -34,9 +34,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+// Add services to the container.
 builder.Services.AddScoped<IEstateRepository, EstateRepository>();
 
-// Add services to the container.
 
 // RESTRICT CONTROLLERS WITH AUTHORIZATION
 builder.Services.AddControllers(opt =>
@@ -108,6 +108,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
+// SERVICES
 using (var environment = app.Services.CreateScope())
 {
     var services = environment.ServiceProvider;
